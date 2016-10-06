@@ -22,6 +22,8 @@
 #import "VideoViewController.h"
 #import "NormalDismissAnimation.h"
 
+// test here
+
 static NSString *const CourseCellIdentifer = @"CourseCell";
 //static NSString* const CoursesUrl = @"http://c.open.163.com/mob/home/homelist.do?cursor=&rtypes=2%2C3%2C8%2C9";
 
