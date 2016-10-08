@@ -11,6 +11,7 @@
 #import "HomeViewController.h"
 #import "LessonViewController.h"
 #import "MeViewController.h"
+#import "WXApi.h"
 
 @interface AppDelegate ()
 @property (strong, nonatomic) UINavigationController *navController;

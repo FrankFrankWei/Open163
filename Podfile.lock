@@ -50,6 +50,7 @@ PODS:
     - CocoaLumberjack (~> 1.7.0)
     - DTCoreText (~> 1.6.11)
     - VKFoundation (= 0.1.1)
+  - ZLSwipeableView (0.0.8)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1)
@@ -60,6 +61,7 @@ DEPENDENCIES:
   - MJRefresh
   - SDWebImage (~> 3.7)
   - VKVideoPlayer (~> 0.1.1)
+  - ZLSwipeableView
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -76,5 +78,6 @@ SPEC CHECKSUMS:
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   VKFoundation: a3d26de016870f705a256c5c6dbab57865c4e99a
   VKVideoPlayer: 75d0c44d8cd208dd01ae397d2e75c52cfc51dd19
+  ZLSwipeableView: df385760ff4838935cdbcb62878ac5acd7355949
 
 COCOAPODS: 0.39.0

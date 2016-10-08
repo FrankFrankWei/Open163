@@ -75,7 +75,7 @@
 
 - (void)configureForCourse:(Course *)course
 {
-    //    _currentCourse = course;
+    _currentCourse = course;
     [_posterImageView sd_setImageWithURL:[NSURL URLWithString:course.picUrl] placeholderImage:[UIImage imageNamed:@"pic_default1@2x.png"]];
 
     _quantityLabel.text = course.quantity;

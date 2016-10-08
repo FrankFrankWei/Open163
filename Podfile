@@ -12,5 +12,6 @@ pod 'MJRefresh'
 pod 'MBProgressHUD', '~> 1.0.0'
 pod 'KRVideoPlayer'
 pod "VKVideoPlayer", "~> 0.1.1"
+pod 'ZLSwipeableView'
 end
 

@@ -6,7 +6,9 @@
 //  Copyright © 2016 Frank. All rights reserved.
 //
 
-#import "ArrayDataSource.h"
+//#import "ArrayDataSource.h"
+#import "ShareViewController.h"
+#import "ShareView.h"
 #import "Course.h"
 #import "CourseCell.h"
 #import "CourseResponse.h"
@@ -22,15 +24,13 @@
 #import "VideoViewController.h"
 #import "NormalDismissAnimation.h"
 
-// test here
-
 static NSString *const CourseCellIdentifer = @"CourseCell";
 //static NSString* const CoursesUrl = @"http://c.open.163.com/mob/home/homelist.do?cursor=&rtypes=2%2C3%2C8%2C9";
 
-@interface HomeViewController () <UITableViewDelegate, UISearchBarDelegate, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate, VideoViewControllerDelegate>
+@interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate, VideoViewControllerDelegate, CourseCellDelegate, ShareViewControllerDelegate>
 @property (strong, nonatomic) HeaderView *header;
 @property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) ArrayDataSource *courseDataSource;
+//@property (strong, nonatomic) ArrayDataSource *courseDataSource;
 @property (strong, nonatomic) CourseResponse *courseResponse;
 @property (strong, nonatomic) NSMutableArray *courseArrayCache;
 @property (strong, nonatomic) NSString *originUrlForCourses;
@@ -151,6 +151,7 @@ static NSString *const CourseCellIdentifer = @"CourseCell";
     return _courseArrayCache;
 }
 
+/*
 - (ArrayDataSource *)courseDataSource
 {
     if (!_courseDataSource) {
@@ -168,13 +169,14 @@ static NSString *const CourseCellIdentifer = @"CourseCell";
 
     return _courseDataSource;
 }
+ */
 
 - (UITableView *)tableView
 {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 112)];
-        _tableView.dataSource = self.courseDataSource;
-        //        _tableView.dataSource = self;
+        //        _tableView.dataSource = self.courseDataSource;
+        _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.rowHeight = 350;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -209,7 +211,7 @@ static NSString *const CourseCellIdentifer = @"CourseCell";
         success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
             weakSelf.courseResponse = [CourseResponse mj_objectWithKeyValues:responseObject];
             [weakSelf.courseArrayCache addObjectsFromArray:weakSelf.courseResponse.courses];
-            weakSelf.courseDataSource.courses = weakSelf.courseArrayCache;
+            //            weakSelf.courseDataSource.courses = weakSelf.courseArrayCache;
             [weakSelf.tableView reloadData];
             //            [weakSelf hideProgressView];
 
@@ -254,7 +256,45 @@ static NSString *const CourseCellIdentifer = @"CourseCell";
     self.videoAnimation.isPush = NO;
     [self dismissViewControllerAnimated:viewController completion:nil];
 }
+
+#pragma mark - cell delegate
+
+- (void)didShareButtonClick:(Course *)course
+{
+    ShareViewController *shareVC = [[ShareViewController alloc] init];
+    shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    shareVC.delegate = self;
+    [self presentViewController:shareVC animated:YES completion:nil];
+}
+
+#pragma mark - share view controller delegate
+- (void)shareViewDidClickToDismiss:(ShareViewController *)viewController
+{
+    [self dismissViewControllerAnimated:viewController completion:nil];
+}
+
+#pragma mark - tableview datasource delegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _courseArrayCache.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CourseCell *cell = [tableView dequeueReusableCellWithIdentifier:CourseCellIdentifer];
+    if (!cell) {
+        cell = [[CourseCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CourseCellIdentifer];
+        cell.delegate = self;
+    }
+
+    Course *course = _courseArrayCache[indexPath.row];
+    [cell configureForCourse:course];
+    return cell;
+}
 #pragma mark - tableview delegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -279,13 +319,8 @@ static NSString *const CourseCellIdentifer = @"CourseCell";
     }
 }
 
-#pragma mark - cell delegate
-- (void)didShareButtonClick:(Course *)course
-{
-    NSLog(@"%@", course.title);
-}
-
 #pragma mark - uitransitioning delegate
+
 - (nullable id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source;
 {
     return self.videoAnimation;
