@@ -17,6 +17,9 @@
 #import "ConfigResponse.h"
 #import "CourseItemForCategory.h"
 #import "CourseResponseForCategory.h"
+#import "Card.h"
+#import "CardData.h"
+#import "CardResponse.h"
 
 @implementation MJExtensionConfig
 + (void)load
@@ -63,6 +66,15 @@
 
     [CourseResponseForCategory mj_setupObjectClassInArray:^NSDictionary * {
         return @{ @"data" : @"CourseItemForCategory" };
+    }];
+
+    [CardData mj_setupObjectClassInArray:^NSDictionary * {
+        return @{ @"list" : @"Card" };
+    }];
+
+    [Card mj_setupReplacedKeyFromPropertyName:^NSDictionary * {
+        return @{ @"identifier" : @"id",
+            @"desc" : @"description" };
     }];
 }
 @end

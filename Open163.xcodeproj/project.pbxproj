@@ -76,6 +76,10 @@
 		017639951DA913E500EAFD72 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 017639941DA913E500EAFD72 /* libsqlite3.0.tbd */; };
 		017639971DA913F300EAFD72 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 017639961DA913F300EAFD72 /* libz.tbd */; };
 		017639991DA9140900EAFD72 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 017639981DA9140900EAFD72 /* libc++.tbd */; };
+		0176399C1DA914E000EAFD72 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0176399B1DA914E000EAFD72 /* CardView.m */; };
+		0176399F1DA9265400EAFD72 /* Card.m in Sources */ = {isa = PBXBuildFile; fileRef = 0176399E1DA9265400EAFD72 /* Card.m */; };
+		017639A21DA928D600EAFD72 /* CardResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 017639A11DA928D600EAFD72 /* CardResponse.m */; };
+		017639A51DA9292100EAFD72 /* CardData.m in Sources */ = {isa = PBXBuildFile; fileRef = 017639A41DA9292100EAFD72 /* CardData.m */; };
 		0186E0BB1D9351AB007EA9BF /* MJExtensionConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0186E0BA1D9351AB007EA9BF /* MJExtensionConfig.m */; };
 		0186E0BE1D935555007EA9BF /* ArrayDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0186E0BD1D935555007EA9BF /* ArrayDataSource.m */; };
 		0186E0C11D9363F8007EA9BF /* CourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0186E0C01D9363F8007EA9BF /* CourseCell.m */; };
@@ -99,6 +103,8 @@
 		01BC6A641D92B90600BCC51C /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BC6A631D92B90600BCC51C /* HeaderView.m */; };
 		01BC6A6B1D93493A00BCC51C /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BC6A6A1D93493A00BCC51C /* Course.m */; };
 		01BC6A6E1D9349DF00BCC51C /* CourseResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BC6A6D1D9349DF00BCC51C /* CourseResponse.m */; };
+		01C8C22C1DAA2CD300A8F408 /* MyZLSwipeableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C8C22B1DAA2CD300A8F408 /* MyZLSwipeableView.m */; };
+		01C8C22E1DABE07F00A8F408 /* lessonBreak_lastBackground_375x667_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01C8C22D1DABE07F00A8F408 /* lessonBreak_lastBackground_375x667_@2x.png */; };
 		01CDFD9D1D96EE2100A69462 /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CDFD9C1D96EE2000A69462 /* VideoViewController.m */; };
 		01CDFDBD1D96EEA500A69462 /* loading_00048_120x80_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01CDFD9E1D96EEA500A69462 /* loading_00048_120x80_@2x.png */; };
 		01CDFDBE1D96EEA500A69462 /* loading_00049_120x80_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01CDFD9F1D96EEA500A69462 /* loading_00049_120x80_@2x.png */; };
@@ -261,6 +267,14 @@
 		017639941DA913E500EAFD72 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		017639961DA913F300EAFD72 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		017639981DA9140900EAFD72 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		0176399A1DA914E000EAFD72 /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
+		0176399B1DA914E000EAFD72 /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
+		0176399D1DA9265400EAFD72 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		0176399E1DA9265400EAFD72 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
+		017639A01DA928D600EAFD72 /* CardResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardResponse.h; sourceTree = "<group>"; };
+		017639A11DA928D600EAFD72 /* CardResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardResponse.m; sourceTree = "<group>"; };
+		017639A31DA9292100EAFD72 /* CardData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardData.h; sourceTree = "<group>"; };
+		017639A41DA9292100EAFD72 /* CardData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardData.m; sourceTree = "<group>"; };
 		0186E0B91D9351AB007EA9BF /* MJExtensionConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConfig.h; sourceTree = "<group>"; };
 		0186E0BA1D9351AB007EA9BF /* MJExtensionConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJExtensionConfig.m; sourceTree = "<group>"; };
 		0186E0BC1D935555007EA9BF /* ArrayDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayDataSource.h; sourceTree = "<group>"; };
@@ -293,6 +307,9 @@
 		01BC6A6A1D93493A00BCC51C /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
 		01BC6A6C1D9349DF00BCC51C /* CourseResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseResponse.h; sourceTree = "<group>"; };
 		01BC6A6D1D9349DF00BCC51C /* CourseResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseResponse.m; sourceTree = "<group>"; };
+		01C8C22A1DAA2CD300A8F408 /* MyZLSwipeableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyZLSwipeableView.h; sourceTree = "<group>"; };
+		01C8C22B1DAA2CD300A8F408 /* MyZLSwipeableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyZLSwipeableView.m; sourceTree = "<group>"; };
+		01C8C22D1DABE07F00A8F408 /* lessonBreak_lastBackground_375x667_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "lessonBreak_lastBackground_375x667_@2x.png"; path = "../../../../../Downloads/iOSImagesExtractor/2016-09-21/16-02-47/网易公开课 10061_ipa/car_images/lessonBreak_lastBackground_375x667_@2x.png"; sourceTree = "<group>"; };
 		01CDFD9B1D96EE2000A69462 /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
 		01CDFD9C1D96EE2000A69462 /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
 		01CDFD9E1D96EEA500A69462 /* loading_00048_120x80_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loading_00048_120x80_@2x.png"; path = "../../../../../Downloads/iOSImagesExtractor/2016-09-21/16-02-47/网易公开课 10061_ipa/car_images/loading_00048_120x80_@2x.png"; sourceTree = "<group>"; };
@@ -569,6 +586,7 @@
 		01EE4C5D1D92978C00C60D3F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				01C8C22D1DABE07F00A8F408 /* lessonBreak_lastBackground_375x667_@2x.png */,
 				011770561DA78A340032303A /* player_share_qq_55x55_@2x.png */,
 				011770571DA78A340032303A /* player_share_weibo_55x55_@2x.png */,
 				011770581DA78A340032303A /* player_share_wxfriend_55x55_@2x.png */,
@@ -823,6 +841,10 @@
 		01EE4C911D929D1100C60D3F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0176399A1DA914E000EAFD72 /* CardView.h */,
+				0176399B1DA914E000EAFD72 /* CardView.m */,
+				01C8C22A1DAA2CD300A8F408 /* MyZLSwipeableView.h */,
+				01C8C22B1DAA2CD300A8F408 /* MyZLSwipeableView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -830,6 +852,12 @@
 		01EE4C921D929D1700C60D3F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0176399D1DA9265400EAFD72 /* Card.h */,
+				0176399E1DA9265400EAFD72 /* Card.m */,
+				017639A01DA928D600EAFD72 /* CardResponse.h */,
+				017639A11DA928D600EAFD72 /* CardResponse.m */,
+				017639A31DA9292100EAFD72 /* CardData.h */,
+				017639A41DA9292100EAFD72 /* CardData.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -998,6 +1026,7 @@
 				01375E731D955F1000581CF9 /* loading4_00040_70x30_@2x.png in Resources */,
 				01EE4C751D9299C600C60D3F /* tabbar_category_HL_27x27_@3x.png in Resources */,
 				0186E0E21D93F441007EA9BF /* home_h5_15x15_@2x.png in Resources */,
+				01C8C22E1DABE07F00A8F408 /* lessonBreak_lastBackground_375x667_@2x.png in Resources */,
 				01375E721D955F1000581CF9 /* loading4_00039_70x30_@2x.png in Resources */,
 				01CDFDC61D96EEA500A69462 /* loading_00057_120x80_@2x.png in Resources */,
 				01375EA71D955F3F00581CF9 /* pull_00051_120x85_@2x.png in Resources */,
@@ -1137,6 +1166,7 @@
 			files = (
 				01E6EECD1D9CC04B0027D3F5 /* CollectionDataSource.m in Sources */,
 				014716EA1D9E7FAF002B3861 /* CoursesViewController.m in Sources */,
+				017639A21DA928D600EAFD72 /* CardResponse.m in Sources */,
 				01FD49681D9570BA00714C16 /* LoadingHeader.m in Sources */,
 				0186E0E91D9420B3007EA9BF /* UIColor+Hex.m in Sources */,
 				01EE4C9B1D929EDB00C60D3F /* CategoryViewController.m in Sources */,
@@ -1161,13 +1191,17 @@
 				01FD496B1D95772800714C16 /* LoadingFooter.m in Sources */,
 				01EE4C481D92974D00C60D3F /* main.m in Sources */,
 				01BC6A6B1D93493A00BCC51C /* Course.m in Sources */,
+				0176399F1DA9265400EAFD72 /* Card.m in Sources */,
+				017639A51DA9292100EAFD72 /* CardData.m in Sources */,
 				01E857791DA2272C00E37278 /* CourseItemForCategory.m in Sources */,
 				01E6EED41D9CD0090027D3F5 /* ClassifyConfig.m in Sources */,
+				0176399C1DA914E000EAFD72 /* CardView.m in Sources */,
 				01E6EEE61D9CD05C0027D3F5 /* Keywords.m in Sources */,
 				01EE4C9E1D929EEE00C60D3F /* LessonViewController.m in Sources */,
 				01E6EED11D9CCFEF0027D3F5 /* Config.m in Sources */,
 				0117706D1DA8017D0032303A /* UIButton+ImageUpTitleDown.m in Sources */,
 				0186E0C81D937917007EA9BF /* UIViewController+HUD.m in Sources */,
+				01C8C22C1DAA2CD300A8F408 /* MyZLSwipeableView.m in Sources */,
 				01EE4C981D929D8900C60D3F /* HomeViewController.m in Sources */,
 				01E6EEEC1D9CDAB10027D3F5 /* CourseCollectionCell.m in Sources */,
 				0117706A1DA7A6E10032303A /* ShareViewController.m in Sources */,
