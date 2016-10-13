@@ -10,5 +10,7 @@
 #import "CourseItem.h"
 
 @interface CourseCollectionCell : UICollectionViewCell
+
 - (void)configCell:(CourseItem *)courseItem;
+
 @end

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface CoursesViewController : UIViewController
-@property (assign, nonatomic) NSString *courseId;
+
+@property (strong, nonatomic) NSString *courseId;
 @property (strong, nonatomic) NSString *courseType;
+
 @end

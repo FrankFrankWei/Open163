@@ -10,12 +10,14 @@
 #import <UIKit/UIKit.h>
 
 @protocol CourseCellDelegate <NSObject>
+
 @optional
 - (void)didShareButtonClick:(Course *)course;
 //- (void)didShareButtonClick;
 @end
 
 @interface CourseCell : UITableViewCell
+
 @property (strong, nonatomic) UIImageView *posterImageView;
 @property (strong, nonatomic) UIImageView *durationImageView;
 @property (strong, nonatomic) UIImageView *videoIconImageView;
@@ -34,4 +36,5 @@
 //@property (strong, nonatomic) Course* course;
 
 - (void)configureForCourse:(Course *)course;
+
 @end

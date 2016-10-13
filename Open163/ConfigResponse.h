@@ -10,6 +10,8 @@
 #import "Config.h"
 
 @interface ConfigResponse : NSObject
+
 @property (strong, nonatomic) Config *data;
 @property (assign, nonatomic) NSInteger code;
+
 @end

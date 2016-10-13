@@ -11,6 +11,7 @@
 @interface CourseCollectionCell ()
 
 @property (strong, nonatomic) UILabel *titleLabel;
+
 @end
 
 @implementation CourseCollectionCell
@@ -35,4 +36,5 @@
 
     return _titleLabel;
 }
+
 @end

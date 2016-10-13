@@ -22,6 +22,7 @@
 #import "CardResponse.h"
 
 @implementation MJExtensionConfig
+
 + (void)load
 {
     [Course mj_setupReplacedKeyFromPropertyName:^NSDictionary * {
@@ -77,4 +78,5 @@
             @"desc" : @"description" };
     }];
 }
+
 @end

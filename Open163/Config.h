@@ -12,6 +12,7 @@
 #import "CourseItem.h"
 
 @interface Config : NSObject // map to : data
+
 @property (strong, nonatomic) ClassifyConfig *classifyConfig;
 @property (strong, nonatomic) Keywords *searchKeyword;
 @property (strong, nonatomic) NSString *articlePhotoEntranceImage;
@@ -19,4 +20,5 @@
 @property BOOL hideArticlePhoto;
 @property (strong, nonatomic) NSArray *hotKeywords;
 @property (strong, nonatomic) NSString *articlePhotoEntranceText;
+
 @end

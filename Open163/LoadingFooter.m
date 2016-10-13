@@ -24,4 +24,5 @@
     self.refreshingTitleHidden = YES;
     self.stateLabel.hidden = YES;
 }
+
 @end

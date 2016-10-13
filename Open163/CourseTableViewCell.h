@@ -10,5 +10,7 @@
 #import "CourseItemForCategory.h"
 
 @interface CourseTableViewCell : UITableViewCell
+
 - (void)configWithCourseItem:(CourseItemForCategory *)item;
+
 @end

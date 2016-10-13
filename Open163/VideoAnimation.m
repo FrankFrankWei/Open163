@@ -10,6 +10,7 @@
 #import "VideoAnimation.h"
 
 @interface VideoAnimation ()
+
 @property (strong, nonatomic) UIView *statusBarView;
 @property (strong, nonatomic) UIImageView *maskPosterImageView;
 

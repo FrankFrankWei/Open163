@@ -11,6 +11,7 @@
 #import <Foundation/Foundation.h>
 
 @interface Course : NSObject <NSCopying>
+
 @property (assign, nonatomic) NSInteger identifier;
 @property (strong, nonatomic) NSString *rid;
 @property (assign, nonatomic) NSInteger rtype;
@@ -23,7 +24,8 @@
 @property (strong, nonatomic) NSString *quantity;
 @property (assign, nonatomic) NSInteger weight;
 @property (assign, nonatomic) NSInteger viewCount;
-@property (assign, nonatomic) NSInteger dbCreateTime;
+//@property (assign, nonatomic) NSInteger dbCreateTime;
+@property (assign, nonatomic) double dbCreateTime;
 @property (nonatomic) BOOL userStore;
 @property (strong, nonatomic) NSString *tagBgColor;
 @property (strong, nonatomic) NSString *weiboUrl;

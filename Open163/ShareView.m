@@ -10,6 +10,7 @@
 @interface ShareView ()
 
 @property (strong, nonatomic) UIView *linkView;
+
 @end
 
 @implementation ShareView
@@ -24,6 +25,7 @@
 
     return self;
 }
+
 #pragma mark - lazy init
 
 - (UIView *)linkView
@@ -36,4 +38,5 @@
 
     return _linkView;
 }
+
 @end

@@ -20,6 +20,7 @@
 @property (strong, nonatomic) UIButton *qqFriendBtn;
 @property (strong, nonatomic) UIButton *yiXinFriendCircleBtn;
 @property (strong, nonatomic) UIButton *yiXinFriendBtn;
+
 @end
 
 @implementation ShareViewController
@@ -67,6 +68,7 @@
 
 #pragma mark - button actions
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
 - (void)shareButtonClick:(id)sender
 {
     if (![[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"mqq://"]]) {
@@ -81,6 +83,7 @@
 {
     NSLog(@"click index %ld", (long)buttonIndex);
 }
+
 #pragma mark - constraints
 
 - (void)setConstraints
@@ -117,6 +120,7 @@
         make.bottom.equalTo(_linkView.mas_bottom).offset(-40);
     }];
 }
+
 #pragma mark - lazy init
 
 - (UIView *)linkView
@@ -227,4 +231,5 @@
 
     return _yiXinFriendBtn;
 }
+
 @end

@@ -17,6 +17,7 @@
 }
 
 #pragma mark - datasource delegate
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.datas.count;
@@ -29,4 +30,5 @@
     _configureBlock(cell, item);
     return cell;
 }
+
 @end

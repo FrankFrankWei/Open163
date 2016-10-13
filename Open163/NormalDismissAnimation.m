@@ -9,6 +9,7 @@
 #import "NormalDismissAnimation.h"
 
 @implementation NormalDismissAnimation
+
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext
 {
     return 5.4f;

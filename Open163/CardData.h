@@ -12,4 +12,5 @@
 
 @property (strong, nonatomic) NSString *next;
 @property (strong, nonatomic) NSArray *list; // Card in list
+
 @end

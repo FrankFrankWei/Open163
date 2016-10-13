@@ -10,7 +10,9 @@
 #import "CourseItem.h"
 
 @interface ClassifyConfig : NSObject
+
 @property (strong, nonatomic) NSArray *source;
 @property (strong, nonatomic) NSArray *base;
 @property (strong, nonatomic) NSArray *special;
+
 @end

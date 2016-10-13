@@ -7,6 +7,7 @@
 //
 
 //#import "ArrayDataSource.h"
+#import "UIViewController+Hint.h"
 #import "ShareViewController.h"
 #import "ShareView.h"
 #import "Course.h"
@@ -28,6 +29,7 @@ static NSString *const CourseCellIdentifer = @"CourseCell";
 //static NSString* const CoursesUrl = @"http://c.open.163.com/mob/home/homelist.do?cursor=&rtypes=2%2C3%2C8%2C9";
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UIViewControllerTransitioningDelegate, UINavigationControllerDelegate, VideoViewControllerDelegate, CourseCellDelegate, ShareViewControllerDelegate>
+
 @property (strong, nonatomic) HeaderView *header;
 @property (strong, nonatomic) UITableView *tableView;
 //@property (strong, nonatomic) ArrayDataSource *courseDataSource;
@@ -36,6 +38,7 @@ static NSString *const CourseCellIdentifer = @"CourseCell";
 @property (strong, nonatomic) NSString *originUrlForCourses;
 @property (strong, nonatomic) VideoAnimation *videoAnimation;
 @property (strong, nonatomic) NormalDismissAnimation *dismissAnimation;
+
 @end
 
 @implementation HomeViewController
@@ -55,6 +58,7 @@ static NSString *const CourseCellIdentifer = @"CourseCell";
 }
 
 #pragma mark - view life cycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -89,6 +93,7 @@ static NSString *const CourseCellIdentifer = @"CourseCell";
 }
 
 #pragma mark - mjrefresh config
+
 - (void)configMJRefresh
 {
     LoadingHeader *loadingHeader = [LoadingHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
@@ -108,6 +113,7 @@ static NSString *const CourseCellIdentifer = @"CourseCell";
 
     return _dismissAnimation;
 }
+
 - (VideoAnimation *)videoAnimation
 {
     if (!_videoAnimation) {
@@ -226,6 +232,7 @@ static NSString *const CourseCellIdentifer = @"CourseCell";
              */
             [weakSelf.tableView.mj_header endRefreshing];
             [weakSelf.tableView.mj_footer endRefreshing];
+            [weakSelf showHintWithMessage:@"网络不给力，请稍后再试"];
         }];
 }
 
@@ -239,7 +246,9 @@ static NSString *const CourseCellIdentifer = @"CourseCell";
     return _originUrlForCourses;
 }
 
+
 #pragma mark - searchbar delegate
+
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     //    self.header.searchBar.showsCancelButton = YES;
@@ -254,7 +263,7 @@ static NSString *const CourseCellIdentifer = @"CourseCell";
 - (void)videoViewDidClickBackButton:(VideoViewController *)viewController
 {
     self.videoAnimation.isPush = NO;
-    [self dismissViewControllerAnimated:viewController completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - cell delegate
@@ -269,9 +278,10 @@ static NSString *const CourseCellIdentifer = @"CourseCell";
 }
 
 #pragma mark - share view controller delegate
+
 - (void)shareViewDidClickToDismiss:(ShareViewController *)viewController
 {
-    [self dismissViewControllerAnimated:viewController completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - tableview datasource delegate
@@ -293,6 +303,7 @@ static NSString *const CourseCellIdentifer = @"CourseCell";
     [cell configureForCourse:course];
     return cell;
 }
+
 #pragma mark - tableview delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -12,8 +12,10 @@
 typedef void (^CollectionViewCellConfigureBlock)(id cell, id item);
 
 @interface CollectionDataSource : NSObject <UICollectionViewDataSource>
+
 @property (strong, nonatomic) NSString *identifier;
 @property (strong, nonatomic) NSMutableArray *datas;
 @property (strong, nonatomic) CollectionViewCellConfigureBlock configureBlock;
-@property (strong, nonatomic) Class cellClass; 
+@property (strong, nonatomic) Class cellClass;
+
 @end

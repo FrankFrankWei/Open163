@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface Keywords : NSObject // map to : hotKeywords
+
 @property (assign, nonatomic) NSInteger identifier; // map to : id
 @property (strong, nonatomic) NSString *name;
 @property (assign, nonatomic) NSInteger type;
@@ -20,4 +21,5 @@
 @property (assign, nonatomic) NSInteger weight;
 @property (assign, nonatomic) NSInteger status;
 @property (strong, nonatomic) NSString *desc; // map to : description
+
 @end

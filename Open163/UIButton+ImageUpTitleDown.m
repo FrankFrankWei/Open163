@@ -9,6 +9,7 @@
 #import "UIButton+ImageUpTitleDown.h"
 
 @implementation UIButton (ImageUpTitleDown)
+
 - (void)upImageAndDownTitle
 {
     CGFloat offset = 20.0f;
@@ -20,4 +21,5 @@
     self.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, -self.titleLabel.intrinsicContentSize.width);
     //    self.imageEdgeInsets = UIEdgeInsetsMake(-self.titleLabel.intrinsicContentSize.height - offset / 2, 0, 0, -self.titleLabel.intrinsicContentSize.width);
 }
+
 @end

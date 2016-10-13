@@ -11,6 +11,7 @@
 @interface MeViewController ()
 
 @property (strong, nonatomic) UIScrollView *mainScrollView;
+
 @end
 
 @implementation MeViewController
@@ -33,7 +34,7 @@
     if (!_mainScrollView) {
         _mainScrollView = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds];
         _mainScrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
-        _mainScrollView.backgroundColor = [UIColor blueColor];
+        //        _mainScrollView.backgroundColor = [UIColor blueColor];
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height + 200)];
         view.backgroundColor = [UIColor whiteColor];
         [_mainScrollView addSubview:view];
@@ -41,7 +42,9 @@
 
     return _mainScrollView;
 }
+
 #pragma mark - view life cycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

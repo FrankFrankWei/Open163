@@ -7,9 +7,12 @@
 //
 
 #import "SourceCollectionViewCell.h"
+
 @interface SourceCollectionViewCell ()
 @end
+
 @implementation SourceCollectionViewCell
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -39,4 +42,5 @@
 
     return _titleLabel;
 }
+
 @end

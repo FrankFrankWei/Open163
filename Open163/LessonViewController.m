@@ -7,6 +7,7 @@
 //
 
 #import "LessonViewController.h"
+#import "UIViewController+Hint.h"
 #import "CardView.h"
 #import "MJExtension.h"
 #import "AFNetworking.h"
@@ -14,7 +15,8 @@
 #import "CardData.h"
 #import "Card.h"
 #import "ZLSwipeableView.h"
-#import "MyZLSwipeableView.h"
+#import "Masonry.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface LessonViewController () <ZLSwipeableViewDataSource, ZLSwipeableViewDelegate, ZLSwipeableViewSwipingDeterminator>
 
@@ -28,6 +30,8 @@
 @property (assign, nonatomic) NSUInteger DirectionFlag; // 0 -left; 1 - right
 @property (strong, nonatomic) UILabel *currentIndexLabel;
 @property (strong, nonatomic) UILabel *totalCountOfLessonLabel;
+@property (strong, nonatomic) CALayer *backgroundImageLayer;
+
 @end
 
 @implementation LessonViewController
@@ -70,9 +74,10 @@
     [httpManager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
         self.response = [CardResponse mj_objectWithKeyValues:responseObject];
         [weakSelf.cardDataCache addObjectsFromArray:_response.data.list];
+        weakSelf.totalCountOfLessonLabel.text = [NSString stringWithFormat:@"/%ld", (long)weakSelf.cardDataCache.count];
     }
-        failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error){
-
+        failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
+            [weakSelf showHintWithMessage:@"网络不给力，请稍后再试"];
         }];
 }
 
@@ -84,85 +89,126 @@
         return nil;
     }
     if (0 == self.cardDataCache.count)
-        return [[CardView alloc] initWithFrame:swipeableView.bounds];
+        return nil;
 
-    /*
-    if (self.cardIndex >= self.cardDataCache.count) {
-        self.cardIndex = 0;
-    }
-     */
-
-    //    swipeableView.numberOfActiveViews = self.cardDataCache.count - swipeableView.history.count >= 3 ? 3 : self.cardDataCache.count - swipeableView.history.count;
-
-    //    NSLog(@"%ld", (long)swipeableView.history.count);
-    //    NSLog(@"%ld", (long)self.cardIndex);
     Card *card = self.cardDataCache[self.cardIndex];
     CardView *cardView = [[CardView alloc] initWithFrame:swipeableView.bounds andCard:card];
 
     self.cardIndex++;
-    NSURL *imageUrl = [NSURL URLWithString:((Card *)_cardDataCache[0]).imageUrl];
-    self.backgroundImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
+    if (0 == self.currentIndex) {
+        NSURL *imageUrl = [NSURL URLWithString:((Card *)_cardDataCache[0]).imageUrl];
+        self.backgroundImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
+    }
 
     return cardView;
 }
 
-#pragma zlswipeable delegate
+#pragma mark - private methods
 
-- (void)swipeableView:(ZLSwipeableView *)swipeableView didSwipeView:(UIView *)view inDirection:(ZLSwipeableViewDirection)direction
+- (void)showBackGroundImageView
 {
-}
-/*
-- (void)swipeableView:(ZLSwipeableView *)swipeableView didCancelSwipe:(UIView *)view{
-    
-    int a = 0;
+    UIImage *image = [UIImage imageNamed:@"lessonBreak_lastBackground_375x667_@2x.png"];
+    CABasicAnimation *contentsAnimation = [CABasicAnimation animationWithKeyPath:@"contents"];
+    contentsAnimation.fromValue = _backgroundImageView.layer.contents;
+    contentsAnimation.toValue = (__bridge id)(image.CGImage);
+    contentsAnimation.duration = 0.5f;
+
+    self.backgroundImageView.layer.contents = (__bridge id)(image.CGImage);
+    [_backgroundImageView.layer addAnimation:contentsAnimation forKey:nil];
 }
 
-- (void)swipeableView:(ZLSwipeableView *)swipeableView
-  didStartSwipingView:(UIView *)view
-           atLocation:(CGPoint)location{
-    int a = 0;
+- (void)hideBackGroudImageView
+{
+    NSURL *imageUrl = [NSURL URLWithString:((Card *)_cardDataCache.lastObject).imageUrl];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
+    CABasicAnimation *contentsAnimation = [CABasicAnimation animationWithKeyPath:@"contents"];
+    contentsAnimation.fromValue = _backgroundImageView.layer.contents;
+    contentsAnimation.toValue = (__bridge id)(image.CGImage);
+    contentsAnimation.duration = 0.2f;
+
+    self.backgroundImageView.layer.contents = (__bridge id)(image.CGImage);
+    [_backgroundImageView.layer addAnimation:contentsAnimation forKey:nil];
 }
 
-- (void)swipeableView:(ZLSwipeableView *)swipeableView
-          swipingView:(UIView *)view
-           atLocation:(CGPoint)location
-          translation:(CGPoint)translation{
-    int a = 0;
-}
- */
+#pragma zlswipeable delegate
 
 - (void)swipeableView:(ZLSwipeableView *)swipeableView
     didEndSwipingView:(UIView *)view
            atLocation:(CGPoint)location
 {
-    if (self.DirectionFlag == 0) {
+    if (self.DirectionFlag == 0) { // left
+        //last card
         if (self.cardDataCache.count - 1 == self.currentIndex) {
 
-            [UIView animateWithDuration:0.4 animations:^{
+            [UIView animateWithDuration:0.2 animations:^{
                 self.swipeableView.alpha = 0;
-                self.visualEffectView.alpha = 0;
             }
                 completion:^(BOOL finished) {
                     self.swipeableView.hidden = YES;
-                    self.visualEffectView.hidden = YES;
+                    [UIView animateWithDuration:0.2 animations:^{
+                        [self showBackGroundImageView];
+                    }
+                        completion:^(BOOL finished) {
+                            [UIView animateWithDuration:0.3 delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                                self.visualEffectView.alpha = 0;
+                            }
+                                completion:^(BOOL finished) {
+                                    self.visualEffectView.hidden = YES;
+                                }];
+                        }];
                 }];
+
             return;
         }
         self.currentIndex++;
         NSInteger imageIndex = (self.currentIndex) % self.cardDataCache.count;
         NSURL *imageUrl = [NSURL URLWithString:((Card *)_cardDataCache[imageIndex]).imageUrl];
-        self.backgroundImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
+
+        CABasicAnimation *contentsAnimation = [CABasicAnimation animationWithKeyPath:@"contents"];
+        contentsAnimation.fromValue = _backgroundImageView.layer.contents;
+        contentsAnimation.toValue = (__bridge id)(image.CGImage);
+        contentsAnimation.duration = 0.6f;
+
+        self.backgroundImageView.layer.contents = (__bridge id)(image.CGImage);
+        [_backgroundImageView.layer addAnimation:contentsAnimation forKey:nil];
     }
-    else if (self.DirectionFlag == 1) {
+    else if (self.DirectionFlag == 1) { //right
         if (self.currentIndex > 0) {
             self.currentIndex--;
+            // 本来是做成循环的，所以使用了取余
             NSInteger imageIndex = (self.currentIndex) % self.cardDataCache.count;
             NSURL *imageUrl = [NSURL URLWithString:((Card *)_cardDataCache[imageIndex]).imageUrl];
-            self.backgroundImageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
+
+            CABasicAnimation *contentsAnimation = [CABasicAnimation animationWithKeyPath:@"contents"];
+            contentsAnimation.fromValue = _backgroundImageView.layer.contents;
+            contentsAnimation.toValue = (__bridge id)(image.CGImage);
+            contentsAnimation.duration = 0.6f;
+
+            self.backgroundImageView.layer.contents = (__bridge id)(image.CGImage);
+            [_backgroundImageView.layer addAnimation:contentsAnimation forKey:nil];
         }
     }
 }
+
+#pragma makr - constraints
+
+- (void)setConstraints
+{
+    [_currentIndexLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.view.mas_centerX).offset(-8);
+        make.top.equalTo(self.swipeableView.mas_bottom).offset(20);
+    }];
+
+    [_totalCountOfLessonLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view.mas_centerX);
+        make.top.equalTo(self.swipeableView.mas_bottom).offset(20);
+    }];
+}
+
 #pragma mark - view life cycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -171,8 +217,12 @@
     self.currentIndex = 0;
     [self.view addSubview:self.backgroundImageView];
     [_backgroundImageView addSubview:self.visualEffectView];
+    [self.view addSubview:self.currentIndexLabel];
+    [self.view addSubview:self.totalCountOfLessonLabel];
     [self getCardsInfo];
     [self.view addSubview:self.swipeableView];
+
+    [self setConstraints];
 
     UISwipeGestureRecognizer *swipeRightGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeToRight:)];
     swipeRightGesture.direction = UISwipeGestureRecognizerDirectionRight;
@@ -186,14 +236,39 @@
     if (self.swipeableView.hidden) {
         self.swipeableView.hidden = NO;
         self.visualEffectView.hidden = NO;
-
-        [UIView animateWithDuration:0.4 animations:^{
-            self.swipeableView.alpha = 1;
-            self.visualEffectView.alpha = 1;
+        //        self.swipeableView.alpha = 1;
+        //        self.visualEffectView.alpha = 1;
+        [UIView animateWithDuration:0.1 animations:^{
+            self.swipeableView.alpha = 0.5;
+            self.visualEffectView.alpha = 0.5;
         }
-            completion:^(BOOL finished){
-
+            completion:^(BOOL finished) {
+                [self hideBackGroudImageView];
+                [UIView animateWithDuration:0.2 animations:^{
+                    self.swipeableView.alpha = 1;
+                    self.visualEffectView.alpha = 1;
+                }
+                    completion:^(BOOL finished){
+                    }];
             }];
+
+        /*
+        NSURL *imageUrl = [NSURL URLWithString:((Card *)_cardDataCache.lastObject).imageUrl];
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
+        CABasicAnimation *contentsAnimation = [CABasicAnimation animationWithKeyPath:@"contents"];
+        contentsAnimation.fromValue = _backgroundImageView.layer.contents;
+        contentsAnimation.toValue = (__bridge id)(image.CGImage);
+        contentsAnimation.duration = 0.3f;
+        
+        self.backgroundImageView.layer.contents = (__bridge id)(image.CGImage);
+        
+        CABasicAnimation *alphaAnimation = [CABasicAnimation animationWithKeyPath:@"alpha"];
+        alphaAnimation.fromValue = @0;
+        alphaAnimation.toValue = @1;
+        alphaAnimation.duration = 0.3;
+        
+        [_backgroundImageView.layer addAnimation:contentsAnimation forKey:nil];
+         */
     }
 
     [self.swipeableView rewind];
@@ -236,6 +311,7 @@
 
     return _swipeableView;
 }
+
 - (NSMutableArray *)cardDataCache
 {
     if (!_cardDataCache) {
@@ -275,12 +351,49 @@
     return _response;
 }
 
-//- (UILabel *)currentIndexLabel{
-//    if (!_currentIndexLabel) {
-//        _currentIndexLabel = [UILabel ]
-//    }
-//}
+- (void)setCurrentIndex:(NSInteger)currentIndex
+{
+    _currentIndex = currentIndex;
+    self.currentIndexLabel.text = [NSString stringWithFormat:@"%ld", (long)(_currentIndex + 1)];
+}
 
+- (UILabel *)currentIndexLabel
+{
+    if (!_currentIndexLabel) {
+        _currentIndexLabel = [[UILabel alloc] init];
+        _currentIndexLabel.font = [UIFont systemFontOfSize:20];
+        _currentIndexLabel.textColor = [UIColor whiteColor];
+        NSString *textForCurrentIndex = [NSString stringWithFormat:@"%ld", (long)(_currentIndex + 1)];
+        CGSize textSize = [self calTextSize:textForCurrentIndex fontSize:16];
+        _currentIndexLabel.frame = CGRectMake(0, 0, textSize.width, textSize.height);
+        _currentIndexLabel.text = textForCurrentIndex;
+    }
+
+    return _currentIndexLabel;
+}
+
+- (UILabel *)totalCountOfLessonLabel
+{
+    if (!_totalCountOfLessonLabel) {
+        _totalCountOfLessonLabel = [[UILabel alloc] init];
+        _totalCountOfLessonLabel.font = [UIFont systemFontOfSize:12];
+        _totalCountOfLessonLabel.textColor = [UIColor whiteColor];
+        NSString *text = [NSString stringWithFormat:@"%ld", (long)(_cardDataCache.count)];
+        CGSize textSize = [self calTextSize:text fontSize:12];
+        _totalCountOfLessonLabel.frame = CGRectMake(0, 0, textSize.width, textSize.height);
+        _totalCountOfLessonLabel.text = text;
+    }
+
+    return _totalCountOfLessonLabel;
+}
+
+- (CGSize)calTextSize:(NSString *)text
+             fontSize:(CGFloat)fontSize
+{
+    NSDictionary *attributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:fontSize] };
+    CGSize textSize = [text boundingRectWithSize:CGSizeMake(100, 100) options:NSStringDrawingTruncatesLastVisibleLine attributes:attributes context:nil].size;
+    return textSize;
+}
 /*
 #pragma mark - Navigation
 

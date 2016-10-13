@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface CourseItem : NSObject
+
 @property (assign, nonatomic) NSInteger identifier; // map to : id
 @property (strong, nonatomic) NSString *templateType;
 @property BOOL notUseName;

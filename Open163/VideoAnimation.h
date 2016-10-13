@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 
 @interface VideoAnimation : NSObject <UIViewControllerAnimatedTransitioning>
+
 @property (strong, nonatomic) UIImageView *posterImageView;
 @property (nonatomic) CGRect originRectOfposterImageViewInScrollView;
 @property (nonatomic) BOOL isPush;

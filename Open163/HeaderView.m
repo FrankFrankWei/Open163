@@ -9,8 +9,11 @@
 #import "HeaderView.h"
 
 @interface HeaderView ()
+
 @property (strong, nonatomic) UIImageView *logoImageView;
+
 @end
+
 @implementation HeaderView
 
 - (instancetype)initWithFrame:(CGRect)frame

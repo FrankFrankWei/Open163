@@ -63,4 +63,5 @@
     _configureCellBlock(cell, item);
     return cell;
 }
+
 @end

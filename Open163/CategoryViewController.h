@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CategoryViewController : UIViewController
+
 @property (strong, nonatomic) NSString *hotSearchWord;
 
 @end

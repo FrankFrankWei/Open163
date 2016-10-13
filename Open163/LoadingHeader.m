@@ -9,6 +9,7 @@
 #import "LoadingHeader.h"
 
 @implementation LoadingHeader
+
 - (void)prepare
 {
     [super prepare];

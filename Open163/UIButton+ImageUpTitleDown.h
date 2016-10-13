@@ -11,4 +11,5 @@
 @interface UIButton (ImageUpTitleDown)
 
 - (void)upImageAndDownTitle;
+
 @end

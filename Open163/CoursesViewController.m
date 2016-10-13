@@ -7,6 +7,7 @@
 //
 
 #import "CoursesViewController.h"
+#import "UIViewController+Hint.h"
 #import "CourseTableViewCell.h"
 #import "Masonry.h"
 #import "AFNetworking.h"
@@ -24,6 +25,7 @@ static NSString *const TableViewCellIdentifier = @"tableViewCellIdentifier";
 static NSString *const SourceCollectionViewCellIdentifier = @"SourceCollectionViewCellIdentifier";
 
 @interface CoursesViewController () <UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+
 @property (strong, nonatomic) NSString *courseSource;
 @property (strong, nonatomic) UIView *menu;
 @property (strong, nonatomic) UIButton *latestButton;
@@ -47,11 +49,13 @@ static NSString *const SourceCollectionViewCellIdentifier = @"SourceCollectionVi
 @property (strong, nonatomic) NSString *originUrlForCourses;
 @property (strong, nonatomic) CourseResponseForCategory *courseResponseForCategory;
 @property (assign, nonatomic) NSInteger currentCourseFlag;
+
 @end
 
 @implementation CoursesViewController
 
 #pragma mark - networking
+
 - (void)getConfig
 {
     static NSString *const url = @"http://c.open.163.com/mob/home/config.do";
@@ -87,8 +91,10 @@ static NSString *const SourceCollectionViewCellIdentifier = @"SourceCollectionVi
             // TODO:
             [weakSelf.tableView.mj_footer endRefreshing];
             [weakSelf.tableView.mj_header endRefreshing];
+            [weakSelf showHintWithMessage:@"网络不给力，请稍后再试"];
         }];
 }
+
 #pragma mark - view life cycle
 
 - (void)viewDidLoad
@@ -128,6 +134,7 @@ static NSString *const SourceCollectionViewCellIdentifier = @"SourceCollectionVi
 }
 
 #pragma mark - private methods
+
 - (void)configMJRefresh
 {
     LoadingFooter *loadingFooter = [LoadingFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
@@ -172,6 +179,7 @@ static NSString *const SourceCollectionViewCellIdentifier = @"SourceCollectionVi
         [self.tableView.mj_header beginRefreshing];
     }
 }
+
 - (void)clickHottestButton:(id)sender
 {
     if (_isLatestButtonSelected) {
@@ -185,6 +193,7 @@ static NSString *const SourceCollectionViewCellIdentifier = @"SourceCollectionVi
         [self.tableView.mj_header beginRefreshing];
     }
 }
+
 - (void)clickFilterButton:(id)sender
 {
     _isFilterButtonSelected = !_isFilterButtonSelected;
@@ -199,7 +208,6 @@ static NSString *const SourceCollectionViewCellIdentifier = @"SourceCollectionVi
         _arrowView.image = [UIImage imageNamed:@"arrow_to_show_7x7_@2x.png"];
         _filterButton.tintColor = [UIColor blackColor];
         _filterButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:13];
-        //hide filter view
         [self hideFilterView];
     }
 }
@@ -480,9 +488,10 @@ static NSString *const SourceCollectionViewCellIdentifier = @"SourceCollectionVi
     cell.titleLabel.backgroundColor = [UIColor colorWithRed:60 / 255.0 green:132 / 255.0 blue:79 / 255.0 alpha:1];
     cell.titleLabel.textColor = [UIColor whiteColor];
     CourseItem *item = _hotCoursesArray[indexPath.row];
-    self.courseId = [NSString stringWithFormat:@"%ld", item.identifier];
+    self.courseId = [NSString stringWithFormat:@"%ld", (long)item.identifier];
     self.courseId = [self.courseId isEqualToString:@"0"] ? @"" : self.courseId;
     self.navigationItem.title = item.name;
+
     [self refresh];
 }
 
@@ -500,7 +509,7 @@ static NSString *const SourceCollectionViewCellIdentifier = @"SourceCollectionVi
     CourseItem *item = _hotCoursesArray[indexPath.row];
     cell.title = item.name;
 
-    if (self.courseId == [NSString stringWithFormat:@"%ld", item.identifier]) {
+    if (self.courseId == [NSString stringWithFormat:@"%ld", (long)item.identifier]) {
         cell.titleLabel.backgroundColor = [UIColor colorWithRed:60 / 255.0 green:132 / 255.0 blue:79 / 255.0 alpha:1];
         cell.titleLabel.textColor = [UIColor whiteColor];
     }
@@ -552,4 +561,5 @@ static NSString *const SourceCollectionViewCellIdentifier = @"SourceCollectionVi
         make.top.equalTo(_sourceContainerView.mas_top);
     }];
 }
+
 @end

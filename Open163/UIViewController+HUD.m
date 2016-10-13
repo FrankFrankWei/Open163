@@ -40,4 +40,5 @@ static const void* progressViewKey = &progressViewKey;
     [self.progressView hideAnimated:YES];
     self.view.userInteractionEnabled = YES;
 }
+
 @end

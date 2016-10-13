@@ -11,12 +11,14 @@
 #import "SDWebImage/UIImageView+WebCache.h"
 
 @interface CardView ()
+
 @property (strong, nonatomic) UIImageView *cardImageView;
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *detailsLabel;
 @property (strong, nonatomic) UIButton *joinButton;
 @property (strong, nonatomic) UILabel *joinCountLabel;
 @property (strong, nonatomic) UILabel *typeNameLabel;
+
 @end
 
 @implementation CardView
@@ -55,6 +57,7 @@
 
     self.backgroundColor = [UIColor whiteColor];
 }
+
 #pragma mark - constraints
 
 - (void)setConstraints
@@ -220,4 +223,5 @@
     self.joinCountLabel.text = [NSString stringWithFormat:@"已有%ld人参与", (long)joinCount];
 }
  */
+
 @end

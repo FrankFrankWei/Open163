@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface CourseItemForCategory : NSObject
+
 @property (strong, nonatomic) NSString *plid;
 @property (strong, nonatomic) NSString *rid;
 @property (assign, nonatomic) NSInteger rtype;
@@ -23,4 +24,5 @@
 @property (assign, nonatomic) NSInteger flag;
 @property (assign, nonatomic) NSInteger playcount;
 @property (strong, nonatomic) NSString *pageUrl;
+
 @end

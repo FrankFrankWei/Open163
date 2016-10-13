@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface CourseResponseForCategory : NSObject
+
 @property (strong, nonatomic) NSString *cursor;
 @property (assign, nonatomic) NSInteger code;
 @property (strong, nonatomic) NSArray *data;
+
 @end

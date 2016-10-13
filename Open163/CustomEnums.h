@@ -6,7 +6,7 @@
 //  Copyright © 2016 Frank. All rights reserved.
 //
 
-typedef enum {
+typedef NS_ENUM(NSInteger, RefreshType) {
     Refresh,
     LoadMore
-} RefreshType;
+};

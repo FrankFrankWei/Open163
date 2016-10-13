@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (MasonryHorizontal)
+
 - (void)distributeSpacingHorizontallyWith:(NSArray *)views;
+
 @end

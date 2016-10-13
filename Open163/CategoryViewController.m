@@ -7,6 +7,7 @@
 //
 
 #import "CategoryViewController.h"
+#import "UIViewController+Hint.h"
 #import "CoursesViewController.h"
 #import "CourseCollectionCell.h"
 #import "MJExtension.h"
@@ -51,6 +52,7 @@ static NSString *const AllCollectionViewCellIdentifier = @"AllCell";
 @property (strong, nonatomic) UICollectionView *allKindsOfCoursesCollectionView;
 @property (strong, nonatomic) CollectionDataSource *allKindsOfCoursesCollectionViewDataSource;
 @property (strong, nonatomic) NSMutableArray *allCoursesArray;
+
 @end
 
 @implementation CategoryViewController
@@ -68,11 +70,8 @@ static NSString *const AllCollectionViewCellIdentifier = @"AllCell";
     return self;
 }
 
-#pragma mark - view life cycle
-- (void)viewDidLoad
+- (void)uiInit
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
     [self.view addSubview:self.headerView];
     [self.view addSubview:self.mainScrollView];
     [self.mainScrollView addSubview:self.containerView];
@@ -95,6 +94,15 @@ static NSString *const AllCollectionViewCellIdentifier = @"AllCell";
     [self getConfig];
 }
 
+#pragma mark - view life cycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    [self uiInit];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.navigationController setNavigationBarHidden:YES animated:NO];
@@ -112,16 +120,18 @@ static NSString *const AllCollectionViewCellIdentifier = @"AllCell";
 }
 
 #pragma mark - uiviewcollection delegate
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CourseItem *item = self.hotCoursesArray[indexPath.row];
     CoursesViewController *coursesVC = [[CoursesViewController alloc] init];
-    coursesVC.courseId = [NSString stringWithFormat:@"%ld", item.identifier];
+    coursesVC.courseId = [NSString stringWithFormat:@"%ld", (long)item.identifier];
     coursesVC.courseType = item.name;
     [self.navigationController pushViewController:coursesVC animated:YES];
 }
 
 #pragma mark - private methods
+
 - (void)getConfig
 {
     static NSString *const url = @"http://c.open.163.com/mob/home/config.do";
@@ -141,8 +151,9 @@ static NSString *const AllCollectionViewCellIdentifier = @"AllCell";
         [weakSelf.allKindsOfCoursesCollectionView reloadData];
         weakSelf.headerView.recommendedPlaceHolder = _configResponse.data.searchKeyword.value;
     }
-        failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error){
+        failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error) {
             // TODO: failed notify
+            [weakSelf showHintWithMessage:@"网络不给力，请稍后再试"];
         }];
 }
 
@@ -429,7 +440,7 @@ static NSString *const AllCollectionViewCellIdentifier = @"AllCell";
 {
     if (!_specialCoursesCollectionView) {
         _specialCoursesCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.specialFlowLayout];
-        _specialCoursesCollectionView.delegate = self;
+        //        _specialCoursesCollectionView.delegate = self;
         _specialCoursesCollectionView.dataSource = self.specialCollectionViewDataSource;
         _specialCoursesCollectionView.backgroundColor = [UIColor colorWithRed:246 / 255.0 green:246 / 255.0 blue:246 / 255.0 alpha:1];
         [_specialCoursesCollectionView registerClass:[CourseCollectionCell class] forCellWithReuseIdentifier:SpecialCollectionViewCellIdentifier];
@@ -439,6 +450,7 @@ static NSString *const AllCollectionViewCellIdentifier = @"AllCell";
 }
 
 #pragma mark - set constrains
+
 - (void)setConstrains
 {
     [_hotContainerView mas_makeConstraints:^(MASConstraintMaker *make) {

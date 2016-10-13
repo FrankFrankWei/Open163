@@ -11,11 +11,13 @@
 #import "SDWebImage/UIImageView+WebCache.h"
 
 @interface CourseTableViewCell ()
+
 @property (strong, nonatomic) UIImageView *avatarImageView;
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *detailsLabel;
 @property (strong, nonatomic) UILabel *quantityLabel;
 @property (strong, nonatomic) UILabel *viewCountLabel;
+
 @end
 
 @implementation CourseTableViewCell
@@ -89,6 +91,7 @@
 }
 
 #pragma mark - lazy property init
+
 - (UIImageView *)avatarImageView
 {
     if (!_avatarImageView) {
@@ -144,4 +147,5 @@
 
     return _viewCountLabel;
 }
+
 @end

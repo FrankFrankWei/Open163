@@ -9,6 +9,7 @@
 #import "ShareButton.h"
 
 @implementation ShareButton
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -25,4 +26,5 @@
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.titleLabel setFont:[UIFont systemFontOfSize:10.0f]];
 }
+
 @end

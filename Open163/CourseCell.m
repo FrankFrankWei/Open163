@@ -29,6 +29,7 @@
 //@property (strong, nonatomic) UIImageView* seperatorImageView;
 //@property (strong, nonatomic) Course* course;
 @property (strong, nonatomic) Course *currentCourse;
+
 @end
 
 @implementation CourseCell
@@ -96,13 +97,16 @@
     }
 
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:course.dbCreateTime / 1000];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+    [formatter setLocale:locale];
     formatter.dateFormat = @"yyyy/MM/dd";
     _createTimeLabel.text = [formatter stringFromDate:date];
 
     _titleLabel.text = course.title;
     _detailsLabel.text = course.desc;
-    NSString *viewCountText = course.viewCount >= 10000 ? [NSString stringWithFormat:@"%ld万人观看", course.viewCount / 10000] : [NSString stringWithFormat:@"%ld人观看", (long)course.viewCount];
+    NSString *viewCountText = course.viewCount >= 10000 ? [NSString stringWithFormat:@"%ld万人观看", (long)course.viewCount / 10000] : [NSString stringWithFormat:@"%ld人观看", (long)course.viewCount];
     _viewCountLabel.text = viewCountText;
 
     [self setConstraints:course];

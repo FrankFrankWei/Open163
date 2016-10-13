@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface Card : NSObject
+
 @property (assign, nonatomic) NSInteger identifier; // map to id
 @property (assign, nonatomic) NSInteger targetId;
 @property (assign, nonatomic) NSInteger weight;
@@ -23,4 +24,5 @@
 @property (assign, nonatomic) NSInteger type;
 @property (strong, nonatomic) NSString *typeName;
 @property (assign, nonatomic) NSInteger classBreakType;
+
 @end

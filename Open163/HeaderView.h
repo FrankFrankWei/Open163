@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface HeaderView : UIView
+
 @property (strong, nonatomic) UISearchBar *searchBar;
 @property (strong, nonatomic) NSString *recommendedPlaceHolder;
 

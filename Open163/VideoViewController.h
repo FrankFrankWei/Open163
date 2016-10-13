@@ -9,11 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @class VideoViewController;
+
 @protocol VideoViewControllerDelegate <NSObject>
 
 - (void)videoViewDidClickBackButton:(VideoViewController *)viewController;
 
 @end
+
 @interface VideoViewController : UIViewController
+
 @property (weak, nonatomic) id<VideoViewControllerDelegate> delegate;
+
 @end

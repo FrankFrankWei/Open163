@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SourceCollectionViewCell : UICollectionViewCell
+
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) UILabel *titleLabel;
 

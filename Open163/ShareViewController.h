@@ -20,4 +20,5 @@
 
 @property (strong, nonatomic) Course *course;
 @property (weak, nonatomic) id<ShareViewControllerDelegate> delegate;
+
 @end
